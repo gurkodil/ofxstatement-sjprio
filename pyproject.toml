@@ -25,6 +25,7 @@ classifiers = [
 keywords = ["ofx", "banking", "statement", "plugin", "ofxstatement"]
 dependencies = [
   "ofxstatement",
+  "openpyxl",
 ]
 
 [project.urls]

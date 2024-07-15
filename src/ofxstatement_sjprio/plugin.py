@@ -47,7 +47,7 @@ class SJPrioParser(StatementParser[str]):
         assert account_id != None
         self.statement.account_id = account_id
         self.statement.currency = "SEK"
-        self.statement.bank_id = "OKQ8"
+        self.statement.bank_id = "SJPRIO"
 
         logging.info(f"SELF f{self.statement}")
         rows = self.sheet.iter_rows()
