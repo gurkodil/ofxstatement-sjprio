@@ -14,4 +14,4 @@ tomli = "*"
 [packages]
 ofxstatement = "*"
 openpyxl = "*"
-ofxstatement-sample = {editable = true,path = "."}
+ofxstatement-sjprio = {editable = true,path = "."}

@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "208c341258a3966cb98f96ce3f259d940fa88a7cb73bb585d430642a033f3e08"
+            "sha256": "60f00e9b9fea5046ff34498d5f620fc82a71f60212c24470ee8322bf6e9f1990"
         },
         "pipfile-spec": 6,
         "requires": {},
@@ -38,7 +38,8 @@
             "version": "==0.9.1"
         },
         "ofxstatement-sjprio": {
-            "version": "==0.0.2"
+            "editable": true,
+            "path": "."
         },
         "openpyxl": {
             "hashes": [
