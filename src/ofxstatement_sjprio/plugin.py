@@ -7,7 +7,7 @@ from ofxstatement.plugin import Plugin
 from ofxstatement.parser import StatementParser
 from ofxstatement.statement import Statement, StatementLine, generate_transaction_id
 from openpyxl import load_workbook
-from typing import Any
+from typing import Any, List
 
 import logging
 
@@ -23,8 +23,8 @@ class SJPrioPlugin(Plugin):
         return SJPrioParser(filename)
 
 
-class SJPrioParser(StatementParser[str]):
-    ACCOUNT_REGEX = "^Kortnummer (\d{6}\*{6}\d{4})$"
+class SJPrioParser(StatementParser[Any]):
+    ACCOUNT_REGEX = r"^Kortnummer (\d{6}\*{6}\d{4})$"
     TRANSACTION_DATE = 0
     TRANSACTION_DESCRIPTION = 2
     TRANSACTION_LOCATION = 3
@@ -42,8 +42,11 @@ class SJPrioParser(StatementParser[str]):
         process the file.
         """
 
+        assert self.sheet is not None
         account_id = self.sheet["A3"].value
-        account_id = re.match(self.ACCOUNT_REGEX, account_id).group(1)
+        m = re.match(self.ACCOUNT_REGEX, account_id)
+        assert m is not None
+        account_id = m.group(1)
         assert account_id != None
         self.statement.account_id = account_id
         self.statement.currency = "SEK"
@@ -67,12 +70,12 @@ class SJPrioParser(StatementParser[str]):
 
         return super().parse()
 
-    def split_records(self) -> Iterable[str]:
+    def split_records(self) -> Iterable[Any]:
         """Return iterable object consisting of a line per transaction"""
         for row in self.rows:
-            yield [c.value for c in row]
+            yield [c.value for c in row if c is not None]
 
-    def parse_record(self, line: str) -> StatementLine:
+    def parse_record(self, line: List[Any]) -> StatementLine:
         """Parse given transaction line and return StatementLine object"""
         stmt_line = StatementLine()
 
