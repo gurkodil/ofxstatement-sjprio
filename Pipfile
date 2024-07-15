@@ -15,4 +15,5 @@ tomli = "*"
 ofxstatement = "*"
 openpyxl = "*"
 types-openpyxl = "*"
+typing-extensions = "*"
 ofxstatement-sjprio = {editable = true,path = "."}
